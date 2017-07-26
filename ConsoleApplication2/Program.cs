@@ -8,7 +8,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.Drawing.Imaging;
 using System.IO;
-using OpenQA.Selenium.Firefox;
 
 namespace ConsoleApplication2
 {
@@ -16,65 +15,32 @@ namespace ConsoleApplication2
     {
         static void Main(string[] args)
         {
-            //using (var driver = new ChromeDriver())
-            //{
-            //    driver.Navigate().GoToUrl("http://testing-ground.scraping.pro/login");
-            //    var userNameField = driver.FindElementById("usr");
-            //    var userPasswordField = driver.FindElementById("pwd");
-            //    var loginButton = driver.FindElementByXPath("//input[@value='Login']");
-            //    userNameField.SendKeys("admin");
-            //    userPasswordField.SendKeys("12345");
-            //    loginButton.Click();
-            //    var result = driver.FindElementByXPath("//div[@id='case_login']/h3").Text;
-            //    File.WriteAllText("result.txt", result);
-
-            //    driver.GetScreenshot().SaveAsFile(@"screen.png", ImageFormat.Png);
-            //}
+            
             using (var driver = new ChromeDriver())
             {
-                driver.Navigate().GoToUrl("https://eplaza.panasonic.ru/");
-                Task.Delay(25000);
-                var Registration = driver.FindElementByXPath("/html/body/div[1]/header/nav/div/div/ul/li[1]/a");
-                Registration.Click();
-                Task.Delay(5000);
-                var city = driver.FindElementByXPath("//*[@id=\"person\"]/div/form/div[1]/div[1]/div[1]/a/span");
-                city.Click();
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-                var myCity = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"popup - location - wrapper - register\"]/div[2]/div[2]/div[1]/ul/li[1]/a")));
-                //var myCity = driver.FindElementsByXPath("//*[@id=\"popup - location - wrapper - register\"]/div[2]/div[2]/div[1]/ul/li[1]/a");
-                myCity.Click();
-                var mail = driver.FindElementByXPath("//*[@id=\"person\"]/div/form/div[1]/div[2]/div[1]/div[2]/input");
-                mail.SendKeys("rebus@mail.ru");
-                mail = driver.FindElementByXPath("//*[@id=\"person\"]/div/form/div[1]/div[2]/div[2]/div[2]/input");
-                mail.SendKeys("rebus123");
-                mail = driver.FindElementByXPath("//*[@id=\"person\"]/div/form/div[1]/div[2]/div[3]/div[2]/input");
-                mail.SendKeys("rebus123");
-                mail = driver.FindElementByName("REGISTER[PERSONAL_GENDER]");
+                driver.Navigate().GoToUrl("https://eplaza.panasonic.ru/bitrix/admin/user_admin.php?lang=ru");
+                driver.Manage().Window.Maximize();
+                var mail = driver.FindElementByName("USER_LOGIN");
+                mail.SendKeys("merikanov95@mail.ru");
+                mail = driver.FindElementByName("USER_PASSWORD");
+                mail.SendKeys("rorshach1994");
+                //catalog = driver.FindElementByName("Login");
+                mail.Submit();
+                Task.Delay(20000).Wait();
+                mail = driver.FindElementByName("find");
+                mail.SendKeys("qwerty@g.ru");
+                mail = driver.FindElementByCssSelector("html.bx-no-touch.bx-no-retina.bx-firefox.bx-boxshadow.bx-borderradius.bx-flexwrap.bx-boxdirection.bx-transition.bx-transform body#bx-admin-prefix div#window_wrapper table.adm-main-wrap tbody tr td.adm-workarea-wrap.adm-workarea-wrap-top div#adm-workarea.adm-workarea.adm-workarea-page form div#adm-filter-tab-wrap-tbl_user_filter.adm-filter-wrap.adm-current-filter table.adm-filter-main-table tbody tr td.adm-filter-main-table-cell div#tbl_user_filter_content.adm-filter-content.adm-filter-content-first div.adm-filter-content-table-wrap table#tbl_user_filter.adm-filter-content-table tbody tr#tbl_user_filter_row_miss-0 td.adm-filter-item-center div.adm-filter-alignment div.adm-filter-box-sizing span.adm-select-wrap select.adm-select option");
                 mail.Click();
-                mail = driver.FindElementByXPath("//*[@id=\"person\"]/div/form/div[1]/div[2]/div[4]/div[2]/div/div/select/option[2]");
+                mail = driver.FindElementByName("set_filter");
                 mail.Click();
-                mail = driver.FindElementByName("REGISTER[NAME]");
-                mail.SendKeys("Eplaza");
-                mail = driver.FindElementByName("REGISTER[LAST_NAME]");
-                mail.SendKeys("Panasonic");
-                mail = driver.FindElementByName("REGISTER[PERSONAL_PHONE]");
-                mail.SendKeys("79053654311");
-                mail = driver.FindElementByName("day");
+                mail = driver.FindElementByXPath("/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div[2]/div[1]/form/table/tbody/tr/td[1]/label");
                 mail.Click();
-                mail = driver.FindElementByXPath("//*[@id=\"person\"]/div/form/div[1]/div[3]/div[4]/div[2]/div/div[1]/select/option[2]");
+                mail = driver.FindElementById("action_delete_button");
                 mail.Click();
-                mail = driver.FindElementByName("month");
-                mail.Click();
-                mail = driver.FindElementByXPath("//*[@id=\"person\"]/div/form/div[1]/div[3]/div[4]/div[2]/div/div[2]/select/option[2]");
-                mail.Click();
-                mail = driver.FindElementByName("year");
-                mail.Click();
-                mail = driver.FindElementByXPath("//*[@id=\"person\"]/div/form/div[1]/div[3]/div[4]/div[2]/div/div[3]/select/option[21]");
-                mail.Click();
-                mail = driver.FindElementByXPath("//*[@id=\"person\"]/div/form/div[2]/div[2]/label");
-                mail.Click();
+                Task.Delay(1000).Wait();
+                mail.Submit();
 
-
+                Console.ReadKey();
 
 
 
