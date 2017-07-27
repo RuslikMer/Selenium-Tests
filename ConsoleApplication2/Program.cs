@@ -19,47 +19,63 @@ namespace ConsoleApplication2
             using (var driver = new ChromeDriver())
             {
 
-                driver.Navigate().GoToUrl("https://eplaza.panasonic.ru/");
+                driver.Navigate().GoToUrl("https://club.panasonic.ru/profile/");
                 driver.Manage().Window.Maximize();
-                var login = driver.FindElementByXPath("/html/body/div[1]/header/nav/div/div/ul/li[2]/a");
+
+                var login = driver.FindElementByXPath("/html/body/div/div[3]/div[1]/div/div[2]/a/img");
                 login.Click();
-                Task.Delay(2000).Wait();
-                driver.SwitchTo().Window(driver.WindowHandles.ToList().Last());
-                login = driver.FindElementByName("USER_LOGIN");
-                login.SendKeys("vortex@mail.ru");
+                //Task.Delay(2000).Wait();
+                //driver.SwitchTo().Window(driver.WindowHandles.ToList().Last());
+                login = driver.FindElementByName("DIRECT_CRM_EMAIL");
+                login.SendKeys("wormix@mail.ru");
+
+                login = driver.FindElementByName("DIRECT_CRM_PASSWORD");
+                login.SendKeys("1234567");
+                login = driver.FindElementByXPath("/html/body/div/div[5]/aside/div/div[1]/div[1]/form/button");
+                login.Click();
+                Task.Delay(4000).Wait();
+                //driver.Navigate().GoToUrl("https://eplaza.panasonic.ru/personal/personal_data/");
+                login = driver.FindElementByXPath("/html/body/div/div[2]/div[2]/div[2]/div/div[1]/ul/li[1]/a");
+                login.Click();
+                //login.SendKeys("Среда Тест");
+
+                var data = driver.FindElementByXPath("/html/body/div/div[2]/div[2]/div[2]/div/div[2]/ul[1]/li[2]/a");
+                data.Click();
+                //mail.SendKeys("vortex@mail.ru");
+                data = driver.FindElementByName("LASTNAME");
+                data.Clear();
+                data.SendKeys("Среда");
+                //mail.SendKeys("+79033331111");
+                data = driver.FindElementByName("FIRSTNAME");
+                data.Clear();
+                data.SendKeys("Бар");
+                //Task.Delay(2000).Wait();
+                //driver.SwitchTo().Window(driver.WindowHandles.ToList().Last());
+
+                data = driver.FindElementByName("USERNAME");
+                data.Clear();
+                data.SendKeys("Furion");
+                data = driver.FindElementByName("EMAIL");
+                data.Clear();
+                data.SendKeys("wormix@mail.ru");
+                data = driver.FindElementByName("CITY");
+                data.Clear();
+                data.SendKeys("Азгард");
+
                
-                login = driver.FindElementByName("USER_PASSWORD");
-                login.SendKeys("123456");
-                login = driver.FindElementById("js_auth_button");
-                login.Click();
+                data = driver.FindElementByName("PHONE");
+                data.Clear();
+                data.SendKeys("9077774577");
+                data = driver.FindElementByName("PASSWORD");
+                data.SendKeys("1234567");
+                data = driver.FindElementByName("CONFIRM_PASSWORD");
+                data.SendKeys("1234567");
+                data = driver.FindElementByXPath("/html/body/div/div[2]/div[2]/div[3]/div/div[2]/form/input[43]");
+                data.Click();
                 Task.Delay(10000).Wait();
-                driver.Navigate().GoToUrl("https://eplaza.panasonic.ru/personal/personal_data/");
-                login = driver.FindElementByName("NAME");
-                login.Clear();
-                login.SendKeys("Среда Тест");
-               
-                var mail = driver.FindElementByName("EMAIL");
-                mail.Clear();
-                mail.SendKeys("vortex@mail.ru");
-                mail = driver.FindElementByName("PERSONAL_PHONE");
-                mail.Clear();
-                mail.SendKeys("+79033331111");
-                mail = driver.FindElementByXPath("/html/body/div[1]/div/div/div/div[4]/div/div/form/div/div[7]/div[2]/span/a");
-                mail.Click();
-                Task.Delay(2000).Wait();
                 driver.SwitchTo().Window(driver.WindowHandles.ToList().Last());
-               
-                mail = driver.FindElementByName("NEW_PASSWORD");
-                mail.SendKeys("123456");
-                mail = driver.FindElementByName("NEW_PASSWORD_CONFIRM");
-                mail.SendKeys("123456");
-                mail = driver.FindElementByXPath("/html/body/div[8]/div[1]/div[2]/div[2]/div[1]/div/div/form/div[2]/div[3]/div/a");
-                mail.Click();
-               
-                Task.Delay(1000).Wait();
-                mail = driver.FindElementByXPath("/html/body/div[1]/div/div/div/div[4]/div/div/form/div/div[8]/a");
-                mail.Click();
-                
+                data = driver.FindElementByXPath("/html/body/div[2]/div[2]/div[1]/button");
+                data.Click();
                 Console.ReadKey();
 
 
