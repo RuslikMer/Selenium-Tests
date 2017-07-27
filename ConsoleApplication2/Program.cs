@@ -19,40 +19,47 @@ namespace ConsoleApplication2
             using (var driver = new ChromeDriver())
             {
 
-                driver.Navigate().GoToUrl("https://eplaza.panasonic.ru/bitrix/admin/sale_order.php?lang=ru");
+                driver.Navigate().GoToUrl("https://eplaza.panasonic.ru/");
                 driver.Manage().Window.Maximize();
-                var mail = driver.FindElementByName("USER_LOGIN");
-                mail.SendKeys("Bot");
-                mail = driver.FindElementByName("USER_PASSWORD");
-                mail.SendKeys("123456");
-                mail.Submit();
-                Task.Delay(10000).Wait();
-                mail = driver.FindElementByName("filter_account_number");
-                mail.SendKeys("113579");
-                mail = driver.FindElementById("tbl_sale_order_filterset_filter");
-                mail.Click();
-                Task.Delay(3000).Wait();
-                mail = driver.FindElementByXPath("/html/body/table/tbody/tr[2]/td[2]/div/div[4]/div[1]/form/table/tbody/tr/td[3]/table/tbody/tr/td[2]/b/a");
-                mail.Click();
-                mail = driver.FindElementById("btn_delete");
-                mail.Click();
-                IAlert alert = driver.SwitchTo().Alert();
-                alert.Accept();
-                driver.Navigate().GoToUrl("https://eplaza.panasonic.ru/bitrix/admin/user_admin.php?lang=ru");
-                Task.Delay(5000).Wait();
-                mail = driver.FindElementByName("find");
-                mail.SendKeys("qwert@g.ro");
-                mail = driver.FindElementByName("set_filter");
-                mail.Click();
-                Task.Delay(4000).Wait();
-                mail = driver.FindElementByXPath("/html/body/table/tbody/tr[2]/td[2]/div/div[2]/div[1]/form/table/tbody/tr/td[3]/a");
-                mail.Click();
-                mail = driver.FindElementById("btn_delete");
-                mail.Click();
+                var login = driver.FindElementByXPath("/html/body/div[1]/header/nav/div/div/ul/li[2]/a");
+                login.Click();
+                Task.Delay(2000).Wait();
                 driver.SwitchTo().Window(driver.WindowHandles.ToList().Last());
+                login = driver.FindElementByName("USER_LOGIN");
+                login.SendKeys("vortex@mail.ru");
+               
+                login = driver.FindElementByName("USER_PASSWORD");
+                login.SendKeys("123456");
+                login = driver.FindElementById("js_auth_button");
+                login.Click();
+                Task.Delay(10000).Wait();
+                driver.Navigate().GoToUrl("https://eplaza.panasonic.ru/personal/personal_data/");
+                login = driver.FindElementByName("NAME");
+                login.Clear();
+                login.SendKeys("Среда Тест");
+               
+                var mail = driver.FindElementByName("EMAIL");
+                mail.Clear();
+                mail.SendKeys("vortex@mail.ru");
+                mail = driver.FindElementByName("PERSONAL_PHONE");
+                mail.Clear();
+                mail.SendKeys("+79033331111");
+                mail = driver.FindElementByXPath("/html/body/div[1]/div/div/div/div[4]/div/div/form/div/div[7]/div[2]/span/a");
+                mail.Click();
+                Task.Delay(2000).Wait();
+                driver.SwitchTo().Window(driver.WindowHandles.ToList().Last());
+               
+                mail = driver.FindElementByName("NEW_PASSWORD");
+                mail.SendKeys("123456");
+                mail = driver.FindElementByName("NEW_PASSWORD_CONFIRM");
+                mail.SendKeys("123456");
+                mail = driver.FindElementByXPath("/html/body/div[8]/div[1]/div[2]/div[2]/div[1]/div/div/form/div[2]/div[3]/div/a");
+                mail.Click();
+               
                 Task.Delay(1000).Wait();
-                alert = driver.SwitchTo().Alert();
-                alert.Accept();
+                mail = driver.FindElementByXPath("/html/body/div[1]/div/div/div/div[4]/div/div/form/div/div[8]/a");
+                mail.Click();
+                
                 Console.ReadKey();
 
 
